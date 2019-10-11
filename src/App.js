@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 
+import List from './Components/List';
 
 export default class App extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ export default class App extends Component {
   render() {
     return (
       <>
-        <h1>Hello! This is master.</h1>
+        <List />
       </>
     )
   }
