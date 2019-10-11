@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.scss';
 
-import Image from "./Components/Image"
+import Image from './Components/Image';
+import Clock from './Components/Clock';
 
 
 export default class App extends Component {
@@ -16,8 +17,9 @@ export default class App extends Component {
   render() {
     return (
       <>
-        <p>Image</p>
-        <Image imageShadow = {this.state.imageShadow} />
+        {/* <p>Image</p>
+        <Image imageShadow = {this.state.imageShadow} /> */}
+        <Clock />
       </>
     )
   }
