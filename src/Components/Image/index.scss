@@ -1,0 +1,21 @@
+$blockName: ".image";
+
+#{$blockName} {
+    background-color: bisque;
+
+    &--box-shadow-medium {
+        box-shadow: 0 10px 10px -5px;
+    }
+
+    &--box-shadow-big {
+        box-shadow: 0 20px 20px -5px;
+    }
+
+    &--box-shadow-small {
+        box-shadow: 0 5px 5px -5px;
+    }
+}
+
+.test {
+    color: hotpink;
+}
