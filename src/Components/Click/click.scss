@@ -1,0 +1,39 @@
+.click {
+    &__container {
+        height: 100%;
+        width: 100%;
+        background-color: lightgoldenrodyellow;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__message {
+        height: 100px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &-content {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 700;
+            color: darkolivegreen;
+            font-size: 1.4rem;
+        }
+    }
+
+    &__button {
+        height: 100px;
+        width: 300px;
+
+        &-content {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 700;
+            color: darkcyan;
+            font-size: 2.4rem;
+        }
+    }
+}
