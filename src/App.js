@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './App.scss';
 
-import Image from "./Components/Image"
-
 
 export default class App extends Component {
   constructor(props) {
@@ -16,8 +14,7 @@ export default class App extends Component {
   render() {
     return (
       <>
-        <p>Image</p>
-        <Image imageShadow = {this.state.imageShadow} />
+        <h1>Hello! This is master.</h1>
       </>
     )
   }
