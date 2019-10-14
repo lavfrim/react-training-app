@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 
+import CreditInitialData from './Componenst/CreditInitialData';
 
 export default class App extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ export default class App extends Component {
   render() {
     return (
       <>
-        <h1>Hello! This is master.</h1>
+        <CreditInitialData />
       </>
     )
   }
