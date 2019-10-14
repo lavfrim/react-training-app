@@ -7,22 +7,18 @@ const blockName = 'liftMeUp';
 export default class LiftMeUp extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            liftMeUp: 23,
-        }
     }
 
     magicNumberChanger = (number) => {
-        return (+number - 19)
+        return (Number(number) - this.props.constant)
     }
 
     render() {
-        const { liftMeUp } = this.state;
         const { 
             liftingStateUp,
+            constant,
             handlChange,
-        }
+        } = this.props;
 
         return (
             <div className={`${blockName}`}>
@@ -31,7 +27,7 @@ export default class LiftMeUp extends Component {
                     <form>
                         <input 
                             type="number" 
-                            value={liftingStateUp}
+                            value={this.magicNumberChanger(liftingStateUp)}
                             onChange={handlChange}
                         />
                     </form>

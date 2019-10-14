@@ -12,6 +12,7 @@ export default class LiftingStateUp extends Component {
 
         this.state = {
             liftingStateUp: 42,
+            constant: 19,
         }
     }
 
@@ -22,8 +23,16 @@ export default class LiftingStateUp extends Component {
         });
     }
 
+    additionalHandlChange = (event) => {
+        const value = Number(event.target.value);
+        const mainValue = value + this.state.constant;
+        this.setState({
+            liftingStateUp: mainValue,
+        })
+    }
+
     render() {
-        const { liftingStateUp } = this.state;
+        const { liftingStateUp, constant } = this.state;
 
         return (
             <div className={`${blockName}`}>
@@ -39,7 +48,8 @@ export default class LiftingStateUp extends Component {
                 </fieldset>
                 <LiftMeUp 
                     liftingStateUp={liftingStateUp}
-                    handlChange={this.handlChange}
+                    constant={constant}
+                    handlChange={this.additionalHandlChange}
                 />
             </div>
         )
