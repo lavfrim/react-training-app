@@ -14,20 +14,52 @@ export default class CreditInitialData extends Component {
             month: 0,
         }
     }
+    
+    setMonth = () => {
+        const { debt, payment } = this.state;
 
+        if (payment > 0) {
+            this.setState({
+                month: Math.ceil(debt / payment),
+            })
+        } else {
+            console.log(`invalid payment value`);
+        }
+    };
+
+    setPayment = () => {
+        const { debt, month } = this.state; 
+
+        this.setState({
+            payment: debt / month,
+        })
+    }
+
+    qqqq = (name, value) => {
+        this.setState({
+            [name]: value,
+        });
+    }
 
     handlChange = (event) => {
+        console.log(`handlChange`);
         const name = event.target.name;
-        console.log(name);
+        const value = Number(event.target.value);
+
+        console.log(this.state[name]);
+
+        this.qqqq(name, value);
+
+        console.log(this.state[name]);
 
         switch (name) {
-            case 'debt': console.log(name);
+            case 'debt': this.setMonth(); console.log(`debt`);
                 break;
-            case 'payment': console.log(name);
+            case 'payment': this.setMonth(); console.log(`payment`);
                 break;
-            case 'month': console.log(name);
+            case 'month': this.setPayment(); console.log(`month`);
                 break;
-            default: console.log('non');
+            default: console.log('unknown event variant');
                 break;
         }
     }
@@ -57,7 +89,7 @@ export default class CreditInitialData extends Component {
                     
                     <fieldset>
                         <legend>
-                            debt
+                            payment
                         </legend>
                         <input 
                             type="number" 
@@ -69,7 +101,7 @@ export default class CreditInitialData extends Component {
 
                     <fieldset>
                         <legend>
-                            debt
+                            month
                         </legend>
                         <input 
                             type="number" 
