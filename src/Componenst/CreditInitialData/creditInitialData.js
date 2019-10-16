@@ -9,15 +9,13 @@ export default class CreditInitialData extends Component {
         super(props);
 
         this.state = {
-            debt: 0,
-            payment: 0,
-            month: 0,
+            debt: null,
+            payment: null,
+            month: null,
         }
     }
     
-    setMonth = () => {
-        const { debt, payment } = this.state;
-
+    setMonth = (debt, payment) => {
         if (payment > 0) {
             this.setState({
                 month: Math.ceil(debt / payment),
@@ -27,45 +25,39 @@ export default class CreditInitialData extends Component {
         }
     };
 
-    setPayment = () => {
-        const { debt, month } = this.state; 
-
+    setPayment = (debt, month) => {
         this.setState({
-            payment: debt / month,
+            payment: Math.ceil(debt / month * 100) / 100,
         })
     }
 
-    qqqq = (name, value) => {
-        this.setState({
-            [name]: value,
-        });
-    }
-
     handlChange = (event) => {
-        console.log(`handlChange`);
         const name = event.target.name;
         const value = Number(event.target.value);
 
-        console.log(this.state[name]);
-
-        this.qqqq(name, value);
-
-        console.log(this.state[name]);
-
-        switch (name) {
-            case 'debt': this.setMonth(); console.log(`debt`);
-                break;
-            case 'payment': this.setMonth(); console.log(`payment`);
-                break;
-            case 'month': this.setPayment(); console.log(`month`);
-                break;
-            default: console.log('unknown event variant');
-                break;
+        if (value > 0) {
+            this.setState({
+                [name]: value,
+            });
+    
+            switch (name) {
+                case 'debt': this.setMonth(value, this.state.payment); console.log(`debt`);
+                    break;
+                case 'payment': this.setMonth(this.state.debt, value); console.log(`payment`);
+                    break;
+                case 'month': this.setPayment(this.state.debt, value); console.log(`month`);
+                    break;
+                default: console.log('unknown event variant');
+                    break;
+            }
+        } else {
+            alert('Enter a positive value ')
         }
     }
 
     render() {
         const { debt, payment, month } = this.state;
+        console.log(debt, payment, month);
 
         return (
             <div className={`${blockName}`}>
@@ -74,43 +66,45 @@ export default class CreditInitialData extends Component {
                         creditInitialData
                     </legend>
 
-                    <fieldset>
-                        <legend>
-                            debt
-                        </legend>
-                        <input 
-                            type="number" 
-                            placeholder="debt" 
-                            name="debt" 
-                            value={debt} 
-                            onChange={this.handlChange} 
-                        />
-                    </fieldset>
-                    
-                    <fieldset>
-                        <legend>
-                            payment
-                        </legend>
-                        <input 
-                            type="number" 
-                            placeholder="payment" 
-                            name="payment" value={payment}
-                            onChange={this.handlChange} 
-                        />
-                    </fieldset>
+                    <div className={`${blockName}__date-container`}>
+                        <fieldset>
+                            <legend>
+                                debt
+                            </legend>
+                            <input 
+                                type="number" 
+                                placeholder="debt" 
+                                name="debt" 
+                                value={debt} 
+                                onChange={this.handlChange} 
+                            />
+                        </fieldset>
+                        
+                        <fieldset>
+                            <legend>
+                                payment
+                            </legend>
+                            <input 
+                                type="number" 
+                                placeholder="payment" 
+                                name="payment" value={payment}
+                                onChange={this.handlChange} 
+                            />
+                        </fieldset>
 
-                    <fieldset>
-                        <legend>
-                            month
-                        </legend>
-                        <input 
-                            type="number" 
-                            placeholder="month" 
-                            name="month" value={month} 
-                            onChange={this.handlChange} 
-                        />
-                    </fieldset>
-                    
+                        <fieldset>
+                            <legend>
+                                month
+                            </legend>
+                            <input 
+                                type="number" 
+                                placeholder="month" 
+                                name="month" value={month} 
+                                onChange={this.handlChange} 
+                            />
+                        </fieldset>
+                    </div>
+                   
                 </fieldset>
             </div>
         )

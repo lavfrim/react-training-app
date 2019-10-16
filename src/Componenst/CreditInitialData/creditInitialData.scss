@@ -10,4 +10,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    &__date-container {
+        display: flex;
+        flex-direction: row;
+    }
 }
+
