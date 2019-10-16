@@ -1,0 +1,13 @@
+.monthlyPayments {
+    &__month {
+        display: flex;
+        flex-direction: row;
+
+        &-name {
+            margin: 0px;
+            width: 150px;
+        }
+    }
+
+    
+}

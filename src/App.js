@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.scss';
 
 import CreditInitialData from './Componenst/CreditInitialData';
+import MonthlyPayments from './Componenst/MonthlyPayments';
 
 export default class App extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ export default class App extends Component {
     return (
       <>
         <CreditInitialData />
+        <MonthlyPayments />
       </>
     )
   }
