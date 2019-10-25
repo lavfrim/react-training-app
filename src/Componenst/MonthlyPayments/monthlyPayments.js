@@ -22,8 +22,14 @@ export default class MonthlyPayments extends Component {
                 {month: 'October', value: null},
                 {month: 'November', value: null},
                 {month: 'December', value: null},
-            ]
+            ],
+            now: new Date(),
+            debt: 5000,
+            payment: 250,
+            month: 20,
         }
+
+        this.paymentMonth = [];
     }
 
     onChange = () => {
@@ -31,7 +37,14 @@ export default class MonthlyPayments extends Component {
     }
 
     render() {
-        const { months } = this.state;
+        const { months, now, debt, payment, month } = this.state;
+
+        const currentMonth = now.getMonth();
+        console.log(currentMonth);
+
+        for (let i = 0; i < month; i += 1) {
+            this.paymentMonth.add()
+        }
 
         return(
             <div className={`${blockName}`}>
