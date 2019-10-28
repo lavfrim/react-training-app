@@ -32,19 +32,31 @@ export default class MonthlyPayments extends Component {
         this.paymentMonth = [];
     }
 
-    onChange = () => {
+    onChange = (event) => {
+        console.log(event.targ)
         console.log(`onChange`);
     }
 
     render() {
         const { months, now, debt, payment, month } = this.state;
 
-        const currentMonth = now.getMonth();
-        console.log(currentMonth);
+        let currentMonth = now.getMonth();
+        console.log(month);
 
-        for (let i = 0; i < month; i += 1) {
-            this.paymentMonth.add()
+        let m = 0;
+        while (m < month && m < 1200) {
+            this.paymentMonth.push({
+                month: months[currentMonth].month,
+                value: payment,
+            });
+            currentMonth += 1;
+            if (currentMonth >= months.length) {
+                currentMonth = 0;
+            }
+            m += 1;
         }
+
+        console.log(this.paymentMonth);
 
         return(
             <div className={`${blockName}`}>
@@ -52,14 +64,14 @@ export default class MonthlyPayments extends Component {
                     <legend>Monthly payments</legend>
 
                     <div>
-                        {months.map((monthInfo, index) => {
+                        {this.paymentMonth.map((monthInfo, index) => {
                             return(
-                                <div className={`${blockName}__month`}>
+                                <div className={`${blockName}__month`} key={`${index}-${monthInfo.month}-${monthInfo.value}`}>
                                     <p className={`${blockName}__month-name`}>{monthInfo.month}</p>
                                     <input 
                                         type="number" 
                                         placeholder="payment" 
-                                        key={`${index}-${monthInfo.month}-${monthInfo.value}`} 
+                                         
                                         value={monthInfo.value}
                                         onChange={this.handlChange} 
                                     />
