@@ -5,47 +5,35 @@ import './creditInitialData.scss';
 const blockName = 'creditInitialData';
 
 export default class CreditInitialData extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            debt: null,
-            payment: null,
-            month: null,
-        }
-    }
-    
+        
     setMonth = (debt, payment) => {
+        const { setStateValue } = this.props;
         if (payment > 0) {
-            this.setState({
-                month: Math.ceil(debt / payment),
-            })
+            setStateValue('month', Math.ceil(debt / payment))
         } else {
             console.log(`invalid payment value`);
         }
     };
 
     setPayment = (debt, month) => {
-        this.setState({
-            payment: Math.ceil(debt / month * 100) / 100,
-        })
+        const { setStateValue } = this.props;
+        setStateValue('payment', Math.ceil(debt / month * 100) / 100)
     }
 
     handlChange = (event) => {
+        const { debt, payment, setStateValue } = this.props
         const name = event.target.name;
         const value = Number(event.target.value);
 
         if (value > 0) {
-            this.setState({
-                [name]: value,
-            });
+            setStateValue(`${name}`, value);
     
             switch (name) {
-                case 'debt': this.setMonth(value, this.state.payment); console.log(`debt`);
+                case 'debt': this.setMonth(value, payment);
                     break;
-                case 'payment': this.setMonth(this.state.debt, value); console.log(`payment`);
+                case 'payment': this.setMonth(debt, value);
                     break;
-                case 'month': this.setPayment(this.state.debt, value); console.log(`month`);
+                case 'month': this.setPayment(debt, value);
                     break;
                 default: console.log('unknown event variant');
                     break;
@@ -56,8 +44,7 @@ export default class CreditInitialData extends Component {
     }
 
     render() {
-        const { debt, payment, month } = this.state;
-        console.log(debt, payment, month);
+        const { debt, payment, month } = this.props;
 
         return (
             <div className={`${blockName}`}>

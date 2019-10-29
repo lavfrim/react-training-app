@@ -9,43 +9,30 @@ export default class MonthlyPayments extends Component {
         super(props);
 
         this.state = {
-            months: [
-                {month: 'January', value: null},
-                {month: 'February', value: null},
-                {month: 'March', value: null},
-                {month: 'April', value: null},
-                {month: 'May', value: null},
-                {month: 'June', value: null},
-                {month: 'July', value: null},
-                {month: 'August', value: null},
-                {month: 'September', value: null},
-                {month: 'October', value: null},
-                {month: 'November', value: null},
-                {month: 'December', value: null},
-            ],
-            now: new Date(),
-            debt: 5000,
-            payment: 250,
-            month: 20,
+            paymentMonth: []
         }
 
-        this.paymentMonth = [];
-    }
-
-    onChange = (event) => {
-        console.log(event.targ)
-        console.log(`onChange`);
-    }
-
-    render() {
-        const { months, now, debt, payment, month } = this.state;
-
+        const months = [
+            {month: 'January', value: null},
+            {month: 'February', value: null},
+            {month: 'March', value: null},
+            {month: 'April', value: null},
+            {month: 'May', value: null},
+            {month: 'June', value: null},
+            {month: 'July', value: null},
+            {month: 'August', value: null},
+            {month: 'September', value: null},
+            {month: 'October', value: null},
+            {month: 'November', value: null},
+            {month: 'December', value: null},
+        ];
+        const { payment, month, setStateValue } = this.props;
+        const monthsArray = [];
+        const now = new Date();
         let currentMonth = now.getMonth();
-        console.log(month);
-
         let m = 0;
         while (m < month && m < 1200) {
-            this.paymentMonth.push({
+            monthsArray.push({
                 month: months[currentMonth].month,
                 value: payment,
             });
@@ -55,25 +42,61 @@ export default class MonthlyPayments extends Component {
             }
             m += 1;
         }
+        console.log(`monthsArray`)
+        console.log(monthsArray)
+        this.state.paymentMonth = monthsArray;
+        // setStateValue('paymentMonth', monthsArray)
+    }
 
-        console.log(this.paymentMonth);
+    handlChange = (event) => {
+        const { paymentMonth, setStateValue } = this.props;
+        const newPaymentMonths = paymentMonth.slice();
+        const input = event.target;
+        const id = input.id;
+        const value = Number(input.value);
+        const previousValue = paymentMonth[id].value;
+        newPaymentMonths[id].value = value;
+        let  differensOfValue = previousValue - value;
+        let lastIndex = newPaymentMonths.length-1;
+        let correctiveValue = newPaymentMonths[lastIndex].value + differensOfValue;
+        function setCorrectiveValue() {
+            if (correctiveValue < 0) {
+                newPaymentMonths[lastIndex].value = 0;
+                differensOfValue = correctiveValue;
+                lastIndex -= 1;
+                correctiveValue = newPaymentMonths[lastIndex].value + differensOfValue;
+                setCorrectiveValue();
+            } else {
+                newPaymentMonths[lastIndex].value = correctiveValue;
+            }
+        }
+        setCorrectiveValue()
+        
+        setStateValue('paymentMonth', newPaymentMonths)
+    }
 
+    render() {
+        const { paymentMonth } = this.props;
         return(
             <div className={`${blockName}`}>
                 <fieldset>
                     <legend>Monthly payments</legend>
 
                     <div>
-                        {this.paymentMonth.map((monthInfo, index) => {
+                        {paymentMonth && paymentMonth.map((monthInfo, index) => {
                             return(
-                                <div className={`${blockName}__month`} key={`${index}-${monthInfo.month}-${monthInfo.value}`}>
-                                    <p className={`${blockName}__month-name`}>{monthInfo.month}</p>
+                                // key={`${index}-${monthInfo.month}-${monthInfo.value}`} broken focus
+                                <div className={`${blockName}__month`} >
+                                    <p className={`${blockName}__month-name`}>
+                                        <span className={`${blockName}__month-number`}>{index + 1}</span>
+                                        {monthInfo.month}
+                                    </p>
                                     <input 
-                                        type="number" 
+                                        id={`${index}`}
+                                        type="number"
                                         placeholder="payment" 
-                                         
                                         value={monthInfo.value}
-                                        onChange={this.handlChange} 
+                                        onChange={this.handlChange}
                                     />
                                 </div>
                             )

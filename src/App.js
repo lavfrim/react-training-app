@@ -9,15 +9,42 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      imageShadow: 'big',
+      debt: null,
+      payment: null,
+      month: null,
+      paymentMonth: [],
     };
   }
 
+  setStateValue = (name, value) => {
+    this.setState({
+      [name]: value,
+    });
+  }
+
+
   render() {
+    const { debt, payment, month, paymentMonth } = this.state;
+    // console.log(`debt `, debt);
+    // console.log(`payment `, payment);
+    // console.log(`month `, month);
+    // console.log(`paymentMonth `, paymentMonth);
+
     return (
       <>
-        <CreditInitialData />
-        <MonthlyPayments />
+        <CreditInitialData
+          debt={debt}
+          payment={payment}
+          month={month}
+          setStateValue={this.setStateValue}
+        />
+        <MonthlyPayments
+          debt={debt}
+          payment={payment}
+          month={month}
+          paymentMonth={paymentMonth}
+          setStateValue={this.setStateValue}
+        />
       </>
     )
   }
