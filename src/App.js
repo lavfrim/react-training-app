@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Page from './Componenst/Page';
+
 import './App.scss';
 
 
@@ -14,7 +16,7 @@ export default class App extends Component {
   render() {
     return (
       <>
-        <h1>Hello! This is master.</h1>
+        <Page />
       </>
     )
   }
