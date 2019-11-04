@@ -12,16 +12,27 @@ export default class Popover extends Component {
         this.popoverRef = React.createRef();
     }
 
-    getPopoverRef() {
-        return this.popoverRef.current
+    getPopoverAndParentRef() {
+        function getPapent(elemment) {
+           return elemment.parentNode.parentNode
+        }
+
+        const popover = this.popoverRef.current;
+        const popoverParent = getPapent(popover);
+
+        return {popover, popoverParent}
     }
 
     componentWillUpdate() {
-        console.log(this.getPopoverRef())
+        const { scrollElementToVisible } = this.props;
+        const { popover, popoverParent } = this.getPopoverAndParentRef()
+        scrollElementToVisible(popover, popoverParent)
     }
 
     componentDidMount() {
-        console.log(this.getPopoverRef())
+        const { scrollElementToVisible } = this.props;
+        const { popover, popoverParent } = this.getPopoverAndParentRef()
+        scrollElementToVisible(popover, popoverParent)
     }
 
     render() {

@@ -19,6 +19,7 @@ export default class Button extends Component {
     }
 
     render() {
+        const { scrollElementToVisible } = this.props;
         return (
             <>
                 <button 
@@ -29,7 +30,7 @@ export default class Button extends Component {
                 </button>
                 {this.state.isShowPopover && 
                     <div>
-                        <Popover />
+                        <Popover scrollElementToVisible={scrollElementToVisible} />
                     </div>
                 }
             </>

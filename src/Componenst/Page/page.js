@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import Button from '../Button';
-import { HOC } from '../HOC';
+import scrollToVisible from '../HOC';
 
 import './page.scss';
 
-// const WrappedButton = HOC(Button);
+const headerHeight = 50;
+const footerHeight = 50;
+
+const WrappedButton = scrollToVisible(Button, headerHeight, footerHeight);
 
 export default class Page extends Component {
     constructor(props) {
@@ -18,8 +21,10 @@ export default class Page extends Component {
     render() {
         return (
             <div className={this.blockName}>
-                {/* <WrappedButton /> */}
-                <Button />
+                <WrappedButton
+                headerHeight={headerHeight}
+                footerHeight={footerHeight}
+                />
             </div>
         )
     }

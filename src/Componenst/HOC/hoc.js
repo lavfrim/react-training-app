@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default function HOC(WrappedComponent) {
+export default function scrollToVisible(WrappedComponent, headerHeight, footerHeight) {
     return class extends Component {
         constructor(props) {
             super(props);
@@ -9,19 +9,21 @@ export default function HOC(WrappedComponent) {
             }
         }
 
-        doScrollingElement = (popoverDOMElement) => {
+        scrollElementToVisible = (popoverDOMElement, popoverParentDOMElement) => {
+            const { headerHeight, footerHeight } = this.props;
             popoverDOMElement.scrollIntoView({block: "start", behavior: "smooth"});
+            if (headerHeight) {
+                console.log(`headerHeight`)
+            }
         }
 
         render() {
-            console.log(`HOC`);
             return (
                 <WrappedComponent
                 {...this.props}
-                doScrollingElement={this.doScrollingElement}
+                scrollElementToVisible={this.scrollElementToVisible}
                 />
             )
         }
     }
-
 }
