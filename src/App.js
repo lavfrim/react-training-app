@@ -22,9 +22,8 @@ export default class App extends Component {
     });
   }
 
-
-  render() {
-    const { debt, payment, month, paymentMonth } = this.state;
+  render() {   
+    const { debt, payment, month, paymentMonth, isInitialDataChange } = this.state;
     // console.log(`debt `, debt);
     // console.log(`payment `, payment);
     // console.log(`month `, month);
@@ -44,6 +43,7 @@ export default class App extends Component {
           month={month}
           paymentMonth={paymentMonth}
           setStateValue={this.setStateValue}
+          isInitialDataChange={isInitialDataChange}
         />
       </>
     )
