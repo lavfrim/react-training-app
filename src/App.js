@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Perent from './components/Perent';
 import './App.scss';
 
 
@@ -7,14 +8,17 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      imageShadow: 'big',
+      appInfo: 'this is state info form App',
     };
   }
 
   render() {
     return (
       <>
-        <h1>Hello! This is master.</h1>
+        <div>
+          <h1>{this.state.appInfo}</h1>
+          <Perent />
+        </div>
       </>
     )
   }
